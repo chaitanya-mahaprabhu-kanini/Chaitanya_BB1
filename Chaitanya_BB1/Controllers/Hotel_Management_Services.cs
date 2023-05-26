@@ -15,14 +15,14 @@ public class Hotel_Management_Services : ControllerBase
 	}
 
 	
-	[HttpGet]
+	[HttpGet("Get_Hotel_Details")]
 	public IEnumerable<Hotel> GetHotels()
 	{
 		return _hotelRepository.GetHotels();
 	}
 
 	
-	[HttpGet("{id}")]
+	[HttpGet("Get_Hotel_Details_ID_Based")]
 	public ActionResult<Hotel> GetHotel(int id)
 	{
 		var hotel = _hotelRepository.GetHotelById(id);
@@ -34,7 +34,7 @@ public class Hotel_Management_Services : ControllerBase
 	}
 
 	//Authorization needed to Add a new hotel.
-	[HttpPost]
+	[HttpPost("Add_New_Hotel")]
 	[Authorize]
 	public ActionResult<Hotel> AddHotel(Hotel hotel)
 	{
@@ -42,7 +42,7 @@ public class Hotel_Management_Services : ControllerBase
 		return CreatedAtAction(nameof(GetHotel), new { id = hotel.Hid }, hotel);
 	}
 
-	[HttpPut("{id}")]
+	[HttpPut("Update_Hotel_Details_ID_Based")]
 	public IActionResult UpdateHotel(int id, Hotel hotel)
 	{
 		if (id != hotel.Hid)
@@ -68,7 +68,7 @@ public class Hotel_Management_Services : ControllerBase
 
 	//Authorization required to "Delete a Hotel"
 	[Authorize]
-	[HttpDelete("{id}")]
+	[HttpDelete("Delete_Hotel_Details_ID_Based")]
 	public IActionResult DeleteHotel(int id)
 	{
 		var hotel = _hotelRepository.GetHotelById(id);
@@ -82,19 +82,19 @@ public class Hotel_Management_Services : ControllerBase
 		return NoContent();
 	}
 
-	[HttpGet("filterByPriceRange")]
+	[HttpGet("Filter_By_Price_Range")]
 	public IEnumerable<Hotel> FilterHotelsByPriceRange(int minPrice, int maxPrice)
 	{
 		return _hotelRepository.FilterHotelsByPriceRange(minPrice, maxPrice);
 	}
 
-	[HttpGet("filterByLocation")]
+	[HttpGet("Filter_By_Location")]
 	public IEnumerable<Hotel> FilterHotelsByLocation(string location)
 	{
 		return _hotelRepository.FilterHotelsByLocation(location);
 	}
 
-	[HttpGet("filterByAmenity")]
+	[HttpGet("Filter_By_Amenity")]
 	public IEnumerable<Hotel> FilterHotelsByAmenity(string amenity)
 	{
 		return _hotelRepository.FilterHotelsByAmenity(amenity);
@@ -102,7 +102,7 @@ public class Hotel_Management_Services : ControllerBase
 
 
 	//LINQ implementation to count number of available rooms.
-	[HttpGet("{id}/availableRoomsCount")]
+	[HttpGet("Available_Rooms_Count")]
 	public ActionResult<int> CountAvailableRooms(int id)
 	{
 		try
@@ -124,7 +124,7 @@ public class Hotel_Management_Services : ControllerBase
 
 	//Filters data based on location and price range. Does the search dynamically. 
 	//Does not need authentication
-	[HttpGet("filter")]
+	[HttpGet("Filter_Based_On_Location_PriceRange")]
 	public ActionResult<IEnumerable<Hotel>> FilterHotels(string location, int minPrice, int maxPrice)
 	{
 		var filteredHotels = _hotelRepository.FilterHotels(location, minPrice, maxPrice);

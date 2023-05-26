@@ -14,14 +14,14 @@ public class Room_Management_Services : ControllerBase
 		_roomRepository = roomRepository;
 	}
 
-	[HttpGet]
+	[HttpGet("Get_Rooms")]
 	public IEnumerable<Room> GetRooms()
 	{
 		return _roomRepository.GetRooms();
 	}
 
 	
-	[HttpGet("{id}")]
+	[HttpGet("Get_Rooms_By_ID")]
 	public ActionResult<Room> GetRoom(int id)
 	{
 		var room = _roomRepository.GetRoomById(id);
@@ -34,14 +34,14 @@ public class Room_Management_Services : ControllerBase
 
 	//Authorization needed to "Add room"
 	[Authorize]
-	[HttpPost]
+	[HttpPost("Add_A_Room")]
 	public ActionResult<Room> AddRoom(Room room)
 	{
 		_roomRepository.AddRoom(room);
 		return CreatedAtAction(nameof(GetRoom), new { id = room.Rid }, room);
 	}
 
-	[HttpPut("{id}")]
+	[HttpPut("Update_Room_By_ID")]
 	public IActionResult UpdateRoom(int id, Room room)
 	{
 		if (id != room.Rid)
@@ -65,7 +65,7 @@ public class Room_Management_Services : ControllerBase
 
 	//Authorization needed to "Delete a room"
 	[Authorize]
-	[HttpDelete("{id}")]
+	[HttpDelete("Delete_Room_By_ID")]
 	public IActionResult DeleteRoom(int id)
 	{
 		var room = _roomRepository.GetRoomById(id);
@@ -80,7 +80,7 @@ public class Room_Management_Services : ControllerBase
 	}
 
 	//LINQ for getting count of rooms under a hotel.
-	[HttpGet("countByHotel/{hotelId}")]
+	[HttpGet("Count_Rooms_In_Hotel")]
 	public ActionResult<int> CountRoomsByHotel(int hotelId)
 	{
 		int roomCount = _roomRepository.CountRoomsByHotel(hotelId);
