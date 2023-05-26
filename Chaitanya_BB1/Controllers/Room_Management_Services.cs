@@ -79,7 +79,7 @@ public class Room_Management_Services : ControllerBase
 		return NoContent();
 	}
 
-	//Linq for getting count of rooms under a hotel.
+	//LINQ for getting count of rooms under a hotel.
 	[HttpGet("countByHotel/{hotelId}")]
 	public ActionResult<int> CountRoomsByHotel(int hotelId)
 	{

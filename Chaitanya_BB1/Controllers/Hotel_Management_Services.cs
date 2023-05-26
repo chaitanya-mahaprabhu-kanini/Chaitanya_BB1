@@ -100,6 +100,8 @@ public class Hotel_Management_Services : ControllerBase
 		return _hotelRepository.FilterHotelsByAmenity(amenity);
 	}
 
+
+	//LINQ implementation to count number of available rooms.
 	[HttpGet("{id}/availableRoomsCount")]
 	public ActionResult<int> CountAvailableRooms(int id)
 	{
