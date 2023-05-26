@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Chaitanya_BB1.Models;
-using Chaitanya_BB1.Repository;
 using System.Text;
 
 
@@ -15,8 +14,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IHotelsRepository, HotelsRepository>();
-builder.Services.AddScoped<IRoomsRepository, RoomsRepository>();
+builder.Services.AddScoped<IHotelsRepository, HotelRepository>();
+builder.Services.AddScoped<IRoomsRepository, RoomRepository>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("constr")));
 builder.Services.AddDbContext<HotelRoomDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("constr")));
@@ -58,14 +57,6 @@ builder.Services.AddAuthentication(options =>
 
 
 var app = builder.Build();
-
-
-
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-
 
 if (app.Environment.IsDevelopment())
 {
