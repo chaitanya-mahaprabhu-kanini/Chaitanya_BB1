@@ -21,8 +21,8 @@ public class Hotel_Management_Services : ControllerBase
 		return _hotelRepository.GetHotels();
 	}
 
-	//Getting details of hotel by its name.
-	[HttpGet("Get_Hotel_By_Name")]
+	//(LINQ) Getting details of hotel by its name.
+	[HttpGet("L_Get_Hotel_By_Name")]
 	public ActionResult<Hotel> GetHotelByName(string name)
 	{
 		var hotel = _hotelRepository.GetHotelByName(name);
@@ -115,7 +115,7 @@ public class Hotel_Management_Services : ControllerBase
 
 
 	//LINQ implementation to count number of available rooms.
-	[HttpGet("Available_Rooms_Count")]
+	[HttpGet("L_Available_Rooms_Count")]
 	public ActionResult<int> CountAvailableRooms(int id)
 	{
 		try

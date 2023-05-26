@@ -11,4 +11,5 @@ public interface IRoomsRepository
 	void UpdateRoom(Room room);
 	void DeleteRoom(int id);
 	int CountRoomsByHotel(int hotelId);
+	bool GetRoomAvailability(int roomId);
 }

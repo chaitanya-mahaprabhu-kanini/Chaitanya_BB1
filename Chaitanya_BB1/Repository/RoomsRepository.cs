@@ -48,4 +48,16 @@ public class RoomRepository : IRoomsRepository
 	{
 		return _context.Rooms.Count(room => room.Hid == hotelId);
 	}
+
+	//Linq implementation to get the availability of room based on its Rid.
+	public bool GetRoomAvailability(int roomId)
+	{
+		var room = _context.Rooms.FirstOrDefault(r => r.Rid == roomId);
+		if (room != null)
+		{
+			return room.Available != 1;
+		}
+
+		return false;
+	}
 }

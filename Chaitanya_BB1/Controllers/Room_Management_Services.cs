@@ -80,10 +80,23 @@ public class Room_Management_Services : ControllerBase
 	}
 
 	//LINQ for getting count of rooms under a hotel.
-	[HttpGet("Count_Rooms_In_Hotel")]
+	[HttpGet("L_Count_Rooms_In_Hotel")]
 	public ActionResult<int> CountRoomsByHotel(int hotelId)
 	{
 		int roomCount = _roomRepository.CountRoomsByHotel(hotelId);
 		return roomCount;
+	}
+
+	//Linq implementation to get the availability of room based on its Rid.
+	[HttpGet("L_Availability_By_Room_ID")]
+	public ActionResult<bool> GetRoomAvailability(int roomId)
+	{
+		bool roomAvailability = _roomRepository.GetRoomAvailability(roomId);
+		if (!roomAvailability)
+		{
+			return NotFound();
+		}
+
+		return Ok(roomAvailability);
 	}
 }

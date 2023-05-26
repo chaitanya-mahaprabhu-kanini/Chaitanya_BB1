@@ -99,6 +99,8 @@ public class HotelRepository : IHotelsRepository
 
 		return query.ToList();
 	}
+
+	//Linq implementation to get hotel details by name.
 	public Hotel GetHotelByName(string name)
 	{
 		return _context.Hotels.FirstOrDefault(h => h.Hname == name);
