@@ -42,4 +42,10 @@ public class RoomRepository : IRoomsRepository
 			_context.SaveChanges();
 		}
 	}
+
+	//Linq implementation to count of rooms under a hotel.
+	public int CountRoomsByHotel(int hotelId)
+	{
+		return _context.Rooms.Count(room => room.Hid == hotelId);
+	}
 }

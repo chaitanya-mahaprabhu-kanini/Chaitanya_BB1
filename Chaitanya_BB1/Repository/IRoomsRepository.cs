@@ -10,4 +10,5 @@ public interface IRoomsRepository
 	void AddRoom(Room room);
 	void UpdateRoom(Room room);
 	void DeleteRoom(int id);
+	int CountRoomsByHotel(int hotelId);
 }
