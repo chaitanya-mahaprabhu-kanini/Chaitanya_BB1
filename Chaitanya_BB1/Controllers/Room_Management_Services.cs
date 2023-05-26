@@ -89,14 +89,14 @@ public class Room_Management_Services : ControllerBase
 
 	//Linq implementation to get the availability of room based on its Rid.
 	[HttpGet("L_Availability_By_Room_ID")]
-	public ActionResult<bool> GetRoomAvailability(int roomId)
+	public String GetRoomAvailability(int roomId)
 	{
 		bool roomAvailability = _roomRepository.GetRoomAvailability(roomId);
-		if (!roomAvailability)
+		if (roomAvailability == false)
 		{
-			return NotFound();
+			return "Room not available!";
 		}
 
-		return Ok(roomAvailability);
+		return "Room available!";
 	}
 }
