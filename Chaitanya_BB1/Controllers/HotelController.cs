@@ -1,4 +1,5 @@
 ﻿using Chaitanya_BB1.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
@@ -19,6 +20,7 @@ public class HotelController : ControllerBase
 		return _hotelRepository.GetHotels();
 	}
 
+	[Authorize]
 	[HttpGet("{id}")]
 	public ActionResult<Hotel> GetHotel(int id)
 	{
@@ -30,7 +32,9 @@ public class HotelController : ControllerBase
 		return hotel;
 	}
 
+	
 	[HttpPost]
+	[Authorize]
 	public ActionResult<Hotel> AddHotel(Hotel hotel)
 	{
 		_hotelRepository.AddHotel(hotel);
