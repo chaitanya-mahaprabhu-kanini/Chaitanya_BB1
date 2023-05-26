@@ -2,7 +2,7 @@
 
 public class RegisterModel
 {
-	//Registration requires username, email and password
+	//Registration requires username, email and password.
 
 	[Required(ErrorMessage = "User Name is required")]
 	public string? Username { get; set; }

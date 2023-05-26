@@ -2,6 +2,7 @@
 
 public class LoginModel
 {
+	//Login requires username and password.
 	[Required(ErrorMessage = "User Name is required")]
 	public string? Username { get; set; }
 
