@@ -46,55 +46,6 @@ public class Hotel_Management_Services : ControllerBase
 		return hotel;
 	}
 
-	//Authorization needed to Add a new hotel.
-	[HttpPost("Add_New_Hotel")]
-	[Authorize]
-	public ActionResult<Hotel> AddHotel(Hotel hotel)
-	{
-		_hotelRepository.AddHotel(hotel);
-		return CreatedAtAction(nameof(GetHotel), new { id = hotel.Hid }, hotel);
-	}
-
-	[HttpPut("Update_Hotel_Details_ID_Based")]
-	public IActionResult UpdateHotel(int id, Hotel hotel)
-	{
-		if (id != hotel.Hid)
-		{
-			return BadRequest();
-		}
-
-		var existingHotel = _hotelRepository.GetHotelById(id);
-		if (existingHotel == null)
-		{
-			return NotFound();
-		}
-
-		existingHotel.Hname = hotel.Hname;
-		existingHotel.Location = hotel.Location;
-		existingHotel.Price = hotel.Price;
-		existingHotel.Amenity = hotel.Amenity;
-
-		_hotelRepository.UpdateHotel(existingHotel);
-
-		return NoContent();
-	}
-
-	//Authorization required to "Delete a Hotel"
-	[Authorize]
-	[HttpDelete("Delete_Hotel_Details_ID_Based")]
-	public IActionResult DeleteHotel(int id)
-	{
-		var hotel = _hotelRepository.GetHotelById(id);
-		if (hotel == null)
-		{
-			return NotFound();
-		}
-
-		_hotelRepository.DeleteHotel(id);
-
-		return NoContent();
-	}
-
 	[HttpGet("Filter_By_Price_Range")]
 	public IEnumerable<Hotel> FilterHotelsByPriceRange(int minPrice, int maxPrice)
 	{
@@ -142,5 +93,54 @@ public class Hotel_Management_Services : ControllerBase
 	{
 		var filteredHotels = _hotelRepository.FilterHotels(location, minPrice, maxPrice);
 		return Ok(filteredHotels);
+	}
+
+	//Authorization needed to Add a new hotel.
+	[HttpPost("Add_New_Hotel")]
+	[Authorize]
+	public ActionResult<Hotel> AddHotel(Hotel hotel)
+	{
+		_hotelRepository.AddHotel(hotel);
+		return CreatedAtAction(nameof(GetHotel), new { id = hotel.Hid }, hotel);
+	}
+
+	[HttpPut("Update_Hotel_Details_ID_Based")]
+	public IActionResult UpdateHotel(int id, Hotel hotel)
+	{
+		if (id != hotel.Hid)
+		{
+			return BadRequest();
+		}
+
+		var existingHotel = _hotelRepository.GetHotelById(id);
+		if (existingHotel == null)
+		{
+			return NotFound();
+		}
+
+		existingHotel.Hname = hotel.Hname;
+		existingHotel.Location = hotel.Location;
+		existingHotel.Price = hotel.Price;
+		existingHotel.Amenity = hotel.Amenity;
+
+		_hotelRepository.UpdateHotel(existingHotel);
+
+		return NoContent();
+	}
+
+	//Authorization required to "Delete a Hotel"
+	[Authorize]
+	[HttpDelete("Delete_Hotel_Details_ID_Based")]
+	public IActionResult DeleteHotel(int id)
+	{
+		var hotel = _hotelRepository.GetHotelById(id);
+		if (hotel == null)
+		{
+			return NotFound();
+		}
+
+		_hotelRepository.DeleteHotel(id);
+
+		return NoContent();
 	}
 }
