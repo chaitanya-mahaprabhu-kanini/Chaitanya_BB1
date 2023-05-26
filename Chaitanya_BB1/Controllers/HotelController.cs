@@ -74,4 +74,22 @@ public class HotelController : ControllerBase
 
 		return NoContent();
 	}
+
+	[HttpGet("filterByPriceRange")]
+	public IEnumerable<Hotel> FilterHotelsByPriceRange(int minPrice, int maxPrice)
+	{
+		return _hotelRepository.FilterHotelsByPriceRange(minPrice, maxPrice);
+	}
+
+	[HttpGet("filterByLocation")]
+	public IEnumerable<Hotel> FilterHotelsByLocation(string location)
+	{
+		return _hotelRepository.FilterHotelsByLocation(location);
+	}
+
+	[HttpGet("filterByAmenity")]
+	public IEnumerable<Hotel> FilterHotelsByAmenity(string amenity)
+	{
+		return _hotelRepository.FilterHotelsByAmenity(amenity);
+	}
 }

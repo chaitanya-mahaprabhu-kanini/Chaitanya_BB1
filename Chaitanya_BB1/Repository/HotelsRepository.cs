@@ -42,4 +42,19 @@ public class HotelRepository : IHotelsRepository
 			_context.SaveChanges();
 		}
 	}
+
+	public IEnumerable<Hotel> FilterHotelsByPriceRange(int minPrice, int maxPrice)
+	{
+		return _context.Hotels.Where(h => h.Price >= minPrice && h.Price <= maxPrice).ToList();
+	}
+
+	public IEnumerable<Hotel> FilterHotelsByLocation(string location)
+	{
+		return _context.Hotels.Where(h => h.Location.ToLower().Contains(location.ToLower())).ToList();
+	}
+
+	public IEnumerable<Hotel> FilterHotelsByAmenity(string amenity)
+	{
+		return _context.Hotels.Where(h => h.Amenity.ToLower().Contains(amenity.ToLower())).ToList();
+	}
 }

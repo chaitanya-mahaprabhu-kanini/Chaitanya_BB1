@@ -8,4 +8,8 @@ public interface IHotelsRepository
 	void AddHotel(Hotel hotel);
 	void UpdateHotel(Hotel hotel);
 	void DeleteHotel(int id);
+	public IEnumerable<Hotel> FilterHotelsByPriceRange(int minPrice, int maxPrice);
+	public IEnumerable<Hotel> FilterHotelsByLocation(string location);
+	public IEnumerable<Hotel> FilterHotelsByAmenity(string amenity);
+
 }
