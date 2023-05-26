@@ -11,5 +11,6 @@ public interface IHotelsRepository
 	public IEnumerable<Hotel> FilterHotelsByPriceRange(int minPrice, int maxPrice);
 	public IEnumerable<Hotel> FilterHotelsByLocation(string location);
 	public IEnumerable<Hotel> FilterHotelsByAmenity(string amenity);
+	int CountAvailableRooms(int hotelId);
 
 }

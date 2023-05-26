@@ -1,4 +1,5 @@
 ﻿using Chaitanya_BB1.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -56,5 +57,23 @@ public class HotelRepository : IHotelsRepository
 	public IEnumerable<Hotel> FilterHotelsByAmenity(string amenity)
 	{
 		return _context.Hotels.Where(h => h.Amenity.ToLower().Contains(amenity.ToLower())).ToList();
+	}
+	public int CountAvailableRooms(int hotelId)
+	{
+		try
+		{
+			var hotel = _context.Hotels.Include(h => h.Rooms).FirstOrDefault(h => h.Hid == hotelId);
+			if (hotel == null)
+			{
+				throw new ArgumentException("Invalid hotelId");
+			}
+
+			return hotel.Rooms.Count(room => room.Available != 1);
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine("Error Encountered - " + ex);
+			throw; // Rethrow the exception
+		}
 	}
 }

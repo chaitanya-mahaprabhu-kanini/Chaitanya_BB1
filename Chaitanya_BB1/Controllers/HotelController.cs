@@ -92,4 +92,25 @@ public class HotelController : ControllerBase
 	{
 		return _hotelRepository.FilterHotelsByAmenity(amenity);
 	}
+
+	[HttpGet("{id}/availableRoomsCount")]
+	public ActionResult<int> CountAvailableRooms(int id)
+	{
+		try
+		{
+			var hotel = _hotelRepository.GetHotelById(id);
+			if (hotel == null)
+			{
+				return NotFound();
+			}
+
+			int availableRoomsCount = _hotelRepository.CountAvailableRooms(id);
+			return availableRoomsCount;
+		}
+		catch (Exception ex)
+		{
+			// Log the exception or handle it as per your application's needs
+			return StatusCode(500, "Sorry! :( .An error occurred while retrieving the available rooms count.");
+		}
+	}
 }
