@@ -99,4 +99,8 @@ public class HotelRepository : IHotelsRepository
 
 		return query.ToList();
 	}
+	public Hotel GetHotelByName(string name)
+	{
+		return _context.Hotels.FirstOrDefault(h => h.Hname == name);
+	}
 }

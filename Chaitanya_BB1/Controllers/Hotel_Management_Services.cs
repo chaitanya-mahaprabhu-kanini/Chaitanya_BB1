@@ -14,14 +14,27 @@ public class Hotel_Management_Services : ControllerBase
 		_hotelRepository = hotelRepository;
 	}
 
-	
+	//Getting details of all hotels.
 	[HttpGet("Get_Hotel_Details")]
 	public IEnumerable<Hotel> GetHotels()
 	{
 		return _hotelRepository.GetHotels();
 	}
 
-	
+	//Getting details of hotel by its name.
+	[HttpGet("Get_Hotel_By_Name")]
+	public ActionResult<Hotel> GetHotelByName(string name)
+	{
+		var hotel = _hotelRepository.GetHotelByName(name);
+		if (hotel == null)
+		{
+			return NotFound();
+		}
+
+		return Ok(hotel);
+	}
+
+	//Getting hotel information based on its ID.
 	[HttpGet("Get_Hotel_Details_ID_Based")]
 	public ActionResult<Hotel> GetHotel(int id)
 	{
