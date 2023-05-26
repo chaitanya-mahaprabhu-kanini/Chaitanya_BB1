@@ -121,4 +121,13 @@ public class Hotel_Management_Services : ControllerBase
 			return StatusCode(500, "Sorry! :( .An error occurred while retrieving the available rooms count.");
 		}
 	}
+
+	//Filters data based on location and price range. Does the search dynamically. 
+	//Does not need authentication
+	[HttpGet("filter")]
+	public ActionResult<IEnumerable<Hotel>> FilterHotels(string location, int minPrice, int maxPrice)
+	{
+		var filteredHotels = _hotelRepository.FilterHotels(location, minPrice, maxPrice);
+		return Ok(filteredHotels);
+	}
 }

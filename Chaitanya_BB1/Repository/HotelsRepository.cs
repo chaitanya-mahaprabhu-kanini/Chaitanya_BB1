@@ -76,4 +76,27 @@ public class HotelRepository : IHotelsRepository
 			throw; // Rethrow the exception
 		}
 	}
+
+	//Filters data based on location and price range. Does the search dynamically.
+	public IEnumerable<Hotel> FilterHotels(string location, int minPrice, int maxPrice)
+	{
+		var query = _context.Hotels.AsQueryable();
+
+		if (!string.IsNullOrEmpty(location))
+		{
+			query = query.Where(h => h.Location == location);
+		}
+
+		if (minPrice > 0)
+		{
+			query = query.Where(h => h.Price >= minPrice);
+		}
+
+		if (maxPrice > 0)
+		{
+			query = query.Where(h => h.Price <= maxPrice);
+		}
+
+		return query.ToList();
+	}
 }
