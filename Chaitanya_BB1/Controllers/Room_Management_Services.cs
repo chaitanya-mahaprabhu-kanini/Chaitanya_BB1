@@ -1,8 +1,9 @@
 ﻿using Chaitanya_BB1.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
-[Route("api/[controller]")]
+[Route("api/Room_Management_Services")]
 [ApiController]
 public class Room_Management_Services : ControllerBase
 {
@@ -19,6 +20,7 @@ public class Room_Management_Services : ControllerBase
 		return _roomRepository.GetRooms();
 	}
 
+	
 	[HttpGet("{id}")]
 	public ActionResult<Room> GetRoom(int id)
 	{
@@ -30,6 +32,8 @@ public class Room_Management_Services : ControllerBase
 		return room;
 	}
 
+	//Authorization needed to "Add room"
+	[Authorize]
 	[HttpPost]
 	public ActionResult<Room> AddRoom(Room room)
 	{
@@ -59,6 +63,8 @@ public class Room_Management_Services : ControllerBase
 		return NoContent();
 	}
 
+	//Authorization needed to "Delete a room"
+	[Authorize]
 	[HttpDelete("{id}")]
 	public IActionResult DeleteRoom(int id)
 	{

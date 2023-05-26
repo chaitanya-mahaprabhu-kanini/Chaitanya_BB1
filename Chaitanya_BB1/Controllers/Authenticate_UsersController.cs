@@ -6,13 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 [Route("api/[controller]")]
 [ApiController]
-public class AuthenticateController : ControllerBase
+public class Authenticate_UsersController : ControllerBase
 {
 	private readonly UserManager<IdentityUser> _userManager;
 	private readonly RoleManager<IdentityRole> _roleManager;
 	private readonly IConfiguration _configuration;
 
-	public AuthenticateController(
+	public Authenticate_UsersController(
 		UserManager<IdentityUser> userManager,
 		RoleManager<IdentityRole> roleManager,
 		IConfiguration configuration)

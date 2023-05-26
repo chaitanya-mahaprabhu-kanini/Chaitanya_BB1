@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
-[Route("api/[controller]")]
+[Route("api/Hotel_Management_Services")]
 [ApiController]
 public class Hotel_Management_Services : ControllerBase
 {
@@ -14,13 +14,14 @@ public class Hotel_Management_Services : ControllerBase
 		_hotelRepository = hotelRepository;
 	}
 
+	
 	[HttpGet]
 	public IEnumerable<Hotel> GetHotels()
 	{
 		return _hotelRepository.GetHotels();
 	}
 
-	[Authorize]
+	
 	[HttpGet("{id}")]
 	public ActionResult<Hotel> GetHotel(int id)
 	{
@@ -32,7 +33,7 @@ public class Hotel_Management_Services : ControllerBase
 		return hotel;
 	}
 
-	
+	//Authorization needed to Add a new hotel.
 	[HttpPost]
 	[Authorize]
 	public ActionResult<Hotel> AddHotel(Hotel hotel)
@@ -65,6 +66,8 @@ public class Hotel_Management_Services : ControllerBase
 		return NoContent();
 	}
 
+	//Authorization required to "Delete a Hotel"
+	[Authorize]
 	[HttpDelete("{id}")]
 	public IActionResult DeleteHotel(int id)
 	{
@@ -113,7 +116,6 @@ public class Hotel_Management_Services : ControllerBase
 		}
 		catch (Exception ex)
 		{
-			// Log the exception or handle it as per your application's needs
 			return StatusCode(500, "Sorry! :( .An error occurred while retrieving the available rooms count.");
 		}
 	}
