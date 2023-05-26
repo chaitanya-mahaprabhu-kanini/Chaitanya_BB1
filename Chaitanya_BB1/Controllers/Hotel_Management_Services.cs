@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 [Route("api/[controller]")]
 [ApiController]
-public class HotelController : ControllerBase
+public class Hotel_Management_Services : ControllerBase
 {
 	private readonly IHotelsRepository _hotelRepository;
 
-	public HotelController(IHotelsRepository hotelRepository)
+	public Hotel_Management_Services(IHotelsRepository hotelRepository)
 	{
 		_hotelRepository = hotelRepository;
 	}
