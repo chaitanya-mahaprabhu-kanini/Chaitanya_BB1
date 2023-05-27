@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 [Route("api/Room_Management_Services")]
 [ApiController]
-public class Room_Management_Services : ControllerBase
+public class Room_Management_ServicesController : ControllerBase
 {
 	private readonly IRoomsRepository _roomRepository;
 
-	public Room_Management_Services(IRoomsRepository roomRepository)
+	public Room_Management_ServicesController(IRoomsRepository roomRepository)
 	{
 		_roomRepository = roomRepository;
 	}
@@ -32,30 +32,9 @@ public class Room_Management_Services : ControllerBase
 		return room;
 	}
 
-	//LINQ for getting count of rooms under a hotel.
-	[HttpGet("L_Count_Rooms_In_Hotel")]
-	public ActionResult<int> CountRoomsByHotel(int hotelId)
-	{
-		int roomCount = _roomRepository.CountRoomsByHotel(hotelId);
-		return roomCount;
-	}
-
-	//Linq implementation to get the availability of room based on its Rid.
-	[HttpGet("L_Availability_By_Room_ID")]
-	public String GetRoomAvailability(int roomId)
-	{
-		bool roomAvailability = _roomRepository.GetRoomAvailability(roomId);
-		if (roomAvailability == false)
-		{
-			return "Room not available!";
-		}
-
-		return "Room available!";
-	}
-
 	//Authorization needed to "Add room"
 	[Authorize]
-	[HttpPost("Add_A_Room")]
+	[HttpPost("Auth_Add_A_Room")]
 	public ActionResult<Room> AddRoom(Room room)
 	{
 		_roomRepository.AddRoom(room);
