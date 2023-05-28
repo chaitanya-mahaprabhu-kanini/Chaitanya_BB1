@@ -74,7 +74,7 @@ public class Authenticate_UsersController : ControllerBase
 		return Ok(new Response { Status = "Success", Message = "User created successfully!" });
 	}
 
-	[HttpPost]
+	/*[HttpPost]
 	[Route("register-admin")]
 	public async Task<IActionResult> RegisterAdmin([FromBody] RegisterModel model)
 	{
@@ -106,7 +106,7 @@ public class Authenticate_UsersController : ControllerBase
 			await _userManager.AddToRoleAsync(user, UserRoles.User);
 		}
 		return Ok(new Response { Status = "Success", Message = "User created successfully!" });
-	}
+	}*/
 
 	private JwtSecurityToken GetToken(List<Claim> authClaims)
 	{

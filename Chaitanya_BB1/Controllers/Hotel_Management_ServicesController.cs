@@ -35,7 +35,9 @@ public class Hotel_Management_Services : ControllerBase
 	}
 
 	//Getting hotel information based on its ID.
-	[HttpGet("Get_Hotel_Details_ID_Based")]
+	//Authorization required.
+	[Authorize]
+	[HttpGet("Auth_Get_Hotel_Details_ID_Based")]
 	public ActionResult<Hotel> GetHotel(int id)
 	{
 		var hotel = _hotelRepository.GetHotelById(id);
@@ -46,9 +48,8 @@ public class Hotel_Management_Services : ControllerBase
 		return hotel;
 	}
 
-	//Authorization needed to Add a new hotel.
-	[HttpPost("Auth_Add_New_Hotel")]
-	[Authorize]
+	//To Add a new hotel.
+	[HttpPost("Add_New_Hotel")]
 	public ActionResult<Hotel> AddHotel(Hotel hotel)
 	{
 		_hotelRepository.AddHotel(hotel);
