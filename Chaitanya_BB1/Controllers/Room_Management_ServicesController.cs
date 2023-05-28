@@ -65,7 +65,7 @@ public class Room_Management_ServicesController : ControllerBase
 
 	//Authorization needed to "Delete a room"
 	[Authorize]
-	[HttpDelete("Delete_Room_By_ID")]
+	[HttpDelete("Auth_Delete_Room_By_ID")]
 	public IActionResult DeleteRoom(int id)
 	{
 		var room = _roomRepository.GetRoomById(id);
